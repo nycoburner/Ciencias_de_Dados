@@ -65,10 +65,10 @@ Os dados são exibidos por tipo de cota e por ano.
 
 ## 📁 Estrutura de Arquivos
 
- index.html      # Estrutura da página
- styles.css      # Estilos (tema escuro)
- script.js       # Lógica, dados e gráficos
- README.md       # Este arquivo
+ index.html---->Estrutura da página
+ styles.css---->Estilos (tema escuro)
+ script.js----->Lógica, dados e gráficos
+ README.md----->Este arquivo
 ---
 
 ## 🚀 Como Executar
