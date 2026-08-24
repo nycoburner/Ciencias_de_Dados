@@ -1,0 +1,407 @@
+const anos = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+const tiposCota = ["Negros", "Pública Negros", "Público", "PCD", "Universal", "Negro Independente"];
+const coresCota = {
+  "Negros": "#e53e3e",
+  "Pública Negros": "#c53030",
+  "Público": "#fc8181",
+  "PCD": "#805ad5",
+  "Universal": "#38a169",
+  "Negro Independente": "#dd6b20"
+};
+
+const cursos = [
+  {
+    id: 1, nome: "Medicina", salario: 10048.57, cor: "#e53e3e",
+    dados: {
+      2016: { "Negros": {c:46,v:1,n:4499}, "Público": {c:617,v:6,n:5142}, "Universal": {c:1615,v:7,n:5868} },
+      2017: { "Negros": {c:54,v:2,n:4400}, "Público": {c:587,v:6,n:4971}, "Universal": {c:1505,v:7,n:5484} },
+      2018: { "Negros": {c:46,v:1,n:4857}, "Público": {c:616,v:6,n:5224}, "Universal": {c:1582,v:8,n:5784} },
+      2019: { "Negros": {c:32,v:1,n:4648}, "Público": {c:477,v:6,n:5101}, "Universal": {c:1414,v:8,n:5650} },
+      2020: { "Negros": {c:59,v:3,n:4397}, "Público": {c:1013,v:12,n:5206}, "Universal": {c:3673,v:15,n:5910} },
+      2021: { "Negros": {c:54,v:2,n:4177}, "Público": {c:828,v:6,n:5587}, "Universal": {c:3373,v:7,n:6160} },
+      2022: { "Negros": {c:65,v:2,n:4185}, "Pública Negros": {c:67,v:3,n:0}, "Público": {c:67,v:3,n:5139}, "PCD": {c:32,v:2,n:4210}, "Universal": {c:2107,v:11,n:5857}, "Negro Independente": {c:0,v:0,n:5151} },
+      2023: { "Negros": {c:83,v:2,n:4032}, "Pública Negros": {c:50,v:3,n:0}, "Público": {c:50,v:3,n:5514}, "PCD": {c:47,v:2,n:5667}, "Universal": {c:1884,v:11,n:6312}, "Negro Independente": {c:0,v:0,n:5965} },
+      2024: { "Negros": {c:86,v:2,n:4363}, "Pública Negros": {c:57,v:4,n:0}, "Público": {c:57,v:4,n:5789}, "PCD": {c:79,v:2,n:5380}, "Universal": {c:1814,v:14,n:6118}, "Negro Independente": {c:0,v:0,n:5285} },
+      2025: { "Negros": {c:124,v:2,n:4624}, "Público": {c:63,v:4,n:5975}, "Universal": {c:2182,v:5,n:6352}, "PCD": {c:0,v:0,n:5933}, "Negro Independente": {c:0,v:0,n:5736} }
+    }
+  },
+  {
+    id: 2, nome: "Administração", salario: 5089.59, cor: "#c53030",
+    dados: {
+      2016: { "Negros": {c:10,v:3,n:1902}, "Público": {c:189,v:12,n:2559}, "Universal": {c:219,v:15,n:2976} },
+      2017: { "Negros": {c:8,v:3,n:2301}, "Público": {c:170,v:12,n:2895}, "Universal": {c:173,v:15,n:3143} },
+      2018: { "Negros": {c:4,v:3,n:2287}, "Público": {c:131,v:12,n:2906}, "Universal": {c:188,v:15,n:3351} },
+      2019: { "Negros": {c:5,v:3,n:2658}, "Público": {c:155,v:12,n:2735}, "Universal": {c:176,v:15,n:3139} },
+      2020: { "Negros": {c:7,v:6,n:2129}, "Público": {c:121,v:24,n:2699}, "Universal": {c:139,v:30,n:2985} },
+      2021: { "Negros": {c:8,v:3,n:2449}, "Público": {c:125,v:12,n:3078}, "Universal": {c:194,v:15,n:3658} },
+      2022: { "Negros": {c:6,v:3,n:1376}, "Pública Negros": {c:8,v:6,n:0}, "Público": {c:8,v:6,n:2716}, "PCD": {c:2,v:3,n:1929}, "Universal": {c:130,v:24,n:3302}, "Negro Independente": {c:0,v:0,n:1381} },
+      2023: { "Negros": {c:6,v:3,n:2117}, "Pública Negros": {c:7,v:6,n:0}, "Público": {c:7,v:6,n:2734}, "Universal": {c:86,v:24,n:3313}, "PCD": {c:0,v:0,n:2643}, "Negro Independente": {c:0,v:0,n:2334} },
+      2024: { "Negros": {c:3,v:3,n:2065}, "Pública Negros": {c:12,v:6,n:0}, "Público": {c:12,v:6,n:3277}, "Universal": {c:101,v:8,n:3522}, "PCD": {c:0,v:0,n:1833}, "Negro Independente": {c:0,v:0,n:2262} },
+      2025: { "Negros": {c:5,v:3,n:2575}, "Público": {c:14,v:6,n:3171}, "Universal": {c:91,v:8,n:3419}, "PCD": {c:0,v:0,n:897}, "Negro Independente": {c:0,v:0,n:2171} }
+    }
+  },
+  {
+    id: 3, nome: "Engenharia de Software", salario: 14437.94, cor: "#38a169",
+    dados: {
+      2016: { "Negros": {c:3,v:1,n:2331}, "Público": {c:86,v:6,n:2700}, "Universal": {c:118,v:7,n:3158} },
+      2017: { "Negros": {c:5,v:2,n:0}, "Público": {c:73,v:6,n:2693}, "Universal": {c:103,v:7,n:3539} },
+      2018: { "Negros": {c:5,v:3,n:0}, "Público": {c:55,v:12,n:2466}, "Universal": {c:110,v:15,n:3172} },
+      2019: { "Negros": {c:4,v:1,n:2809}, "Público": {c:88,v:6,n:3007}, "Universal": {c:126,v:8,n:3409} },
+      2020: { "Negros": {c:3,v:3,n:1942}, "Público": {c:71,v:12,n:2940}, "Universal": {c:150,v:15,n:3437} },
+      2021: { "Negros": {c:4,v:2,n:0}, "Público": {c:89,v:6,n:3262}, "Universal": {c:180,v:7,n:4193} },
+      2022: { "Negros": {c:4,v:2,n:2947}, "Pública Negros": {c:10,v:3,n:0}, "Público": {c:10,v:3,n:3345}, "PCD": {c:2,v:2,n:2212}, "Universal": {c:222,v:11,n:4368}, "Negro Independente": {c:0,v:0,n:2800} },
+      2023: { "Negros": {c:11,v:2,n:2525}, "Pública Negros": {c:9,v:3,n:0}, "Público": {c:9,v:3,n:3537}, "PCD": {c:4,v:2,n:2449}, "Universal": {c:171,v:11,n:4457}, "Negro Independente": {c:0,v:0,n:3240} },
+      2024: { "Negros": {c:15,v:2,n:3486}, "Pública Negros": {c:11,v:3,n:0}, "Público": {c:11,v:3,n:3951}, "PCD": {c:4,v:2,n:1916}, "Universal": {c:184,v:13,n:4692}, "Negro Independente": {c:0,v:0,n:3730} },
+      2025: { "Negros": {c:16,v:2,n:2899}, "Público": {c:16,v:3,n:3952}, "Universal": {c:176,v:4,n:4706}, "PCD": {c:0,v:0,n:3077}, "Negro Independente": {c:0,v:0,n:4015} }
+    }
+  },
+  {
+    id: 4, nome: "Engenharia de Computação", salario: 14333.79, cor: "#d69e2e",
+    dados: {
+      2016: { "Público": {c:71,v:8,n:2657}, "Universal": {c:113,v:8,n:3345} },
+      2017: { "Público": {c:42,v:9,n:2681}, "Universal": {c:103,v:8,n:3818} },
+      2018: { "Negros": {c:2,v:1,n:3198}, "Público": {c:43,v:7,n:2898}, "Universal": {c:86,v:9,n:3539} },
+      2019: { "Negros": {c:3,v:1,n:0}, "Público": {c:38,v:7,n:2975}, "Universal": {c:97,v:9,n:3886} },
+      2020: { "Negros": {c:2,v:2,n:0}, "Público": {c:53,v:15,n:2704}, "Universal": {c:150,v:17,n:3424} },
+      2021: { "Negros": {c:1,v:2,n:0}, "Público": {c:45,v:7,n:3134}, "Universal": {c:160,v:8,n:4226} },
+      2022: { "Negros": {c:3,v:2,n:0}, "Pública Negros": {c:1,v:3,n:0}, "Público": {c:1,v:3,n:3352}, "PCD": {c:0,v:2,n:2194}, "Universal": {c:130,v:13,n:4521}, "Negro Independente": {c:0,v:0,n:3124} },
+      2023: { "Negros": {c:3,v:2,n:2894}, "Pública Negros": {c:4,v:3,n:0}, "Público": {c:4,v:3,n:3678}, "PCD": {c:2,v:2,n:2517}, "Universal": {c:99,v:14,n:4623}, "Negro Independente": {c:0,v:0,n:3489} },
+      2024: { "Negros": {c:4,v:2,n:3127}, "Pública Negros": {c:3,v:4,n:0}, "Público": {c:3,v:4,n:3789}, "PCD": {c:1,v:2,n:2386}, "Universal": {c:80,v:14,n:4715}, "Negro Independente": {c:0,v:0,n:3654} },
+      2025: { "Negros": {c:5,v:2,n:2987}, "Público": {c:3,v:4,n:3856}, "Universal": {c:81,v:5,n:4821}, "PCD": {c:0,v:0,n:2678}, "Negro Independente": {c:0,v:0,n:3742} }
+    }
+  },
+  {
+    id: 5, nome: "Turismo", salario: 2570.12, cor: "#805ad5",
+    dados: {
+      2016: { "Negros": {c:3,v:1,n:2209}, "Público": {c:13,v:6,n:1900}, "Universal": {c:40,v:7,n:2223} },
+      2017: { "Negros": {c:1,v:1,n:0}, "Público": {c:19,v:4,n:2590}, "Universal": {c:29,v:5,n:2892} },
+      2018: { "Negros": {c:1,v:1,n:2181}, "Público": {c:14,v:8,n:1932}, "Universal": {c:18,v:9,n:2387} },
+      2019: { "Negros": {c:2,v:1,n:1117}, "Público": {c:18,v:6,n:2399}, "Universal": {c:25,v:8,n:2619} },
+      2020: { "Negros": {c:1,v:1,n:0}, "Público": {c:7,v:7,n:2161}, "Universal": {c:14,v:22,n:1656} },
+      2021: { "Negros": {c:1,v:2,n:2602}, "Público": {c:5,v:6,n:2184}, "Universal": {c:8,v:7,n:2243} },
+      2022: { "Negros": {c:1,v:2,n:1848}, "Pública Negros": {c:3,v:3,n:0}, "Público": {c:3,v:3,n:1960}, "PCD": {c:0,v:2,n:0}, "Universal": {c:10,v:11,n:1759}, "Negro Independente": {c:0,v:0,n:1759} },
+      2023: { "Negros": {c:0,v:2,n:0}, "Pública Negros": {c:0,v:3,n:0}, "Público": {c:0,v:3,n:2091}, "PCD": {c:1,v:2,n:2767}, "Universal": {c:7,v:11,n:1406} },
+      2024: { "Negros": {c:0,v:2,n:2797}, "Pública Negros": {c:2,v:3,n:0}, "Público": {c:2,v:3,n:2539}, "PCD": {c:0,v:2,n:0}, "Universal": {c:6,v:11,n:2434} },
+      2025: { "Negros": {c:0,v:2,n:0}, "Público": {c:0,v:3,n:1737}, "Universal": {c:4,v:4,n:1987} }
+    }
+  },
+  {
+    id: 6, nome: "Jornalismo - Bacharelado", salario: 4804.84, cor: "#dd6b20",
+    dados: {
+      2016: { "Negros": {c:4,v:2,n:0}, "Público": {c:55,v:6,n:2708}, "Universal": {c:95,v:7,n:3425} },
+      2017: { "Negros": {c:1,v:1,n:0}, "Público": {c:26,v:7,n:2602}, "Universal": {c:68,v:7,n:3830} },
+      2018: { "Negros": {c:2,v:2,n:861}, "Público": {c:32,v:6,n:2564}, "Universal": {c:62,v:7,n:3793} },
+      2019: { "Negros": {c:3,v:2,n:0}, "Público": {c:31,v:6,n:2847}, "Universal": {c:74,v:7,n:3955} },
+      2020: { "Negros": {c:1,v:1,n:0}, "Público": {c:27,v:15,n:2489}, "Universal": {c:70,v:15,n:3642} },
+      2021: { "Negros": {c:3,v:2,n:2314}, "Público": {c:34,v:6,n:2598}, "Universal": {c:98,v:8,n:3917} },
+      2022: { "Negros": {c:1,v:2,n:1876}, "Pública Negros": {c:3,v:3,n:0}, "Público": {c:3,v:3,n:1960}, "PCD": {c:0,v:2,n:1523}, "Universal": {c:59,v:12,n:2765}, "Negro Independente": {c:0,v:0,n:2148} },
+      2023: { "Negros": {c:5,v:2,n:2034}, "Pública Negros": {c:1,v:3,n:0}, "Público": {c:1,v:3,n:2287}, "PCD": {c:1,v:2,n:1698}, "Universal": {c:38,v:12,n:2984}, "Negro Independente": {c:0,v:0,n:2356} },
+      2024: { "Negros": {c:3,v:2,n:2456}, "Pública Negros": {c:2,v:3,n:0}, "Público": {c:2,v:3,n:2371}, "PCD": {c:2,v:2,n:0}, "Universal": {c:38,v:12,n:3128}, "Negro Independente": {c:0,v:0,n:2679} },
+      2025: { "Negros": {c:4,v:2,n:1987}, "Público": {c:3,v:3,n:2214}, "Universal": {c:33,v:4,n:3345}, "PCD": {c:0,v:0,n:1842}, "Negro Independente": {c:0,v:0,n:2593} }
+    }
+  }
+];
+
+function getVal(curso, ano, tipo, campo) {
+  const d = curso.dados[ano] && curso.dados[ano][tipo];
+  if (!d) return null;
+  if (campo === 'ratio') return d.v > 0 ? +(d.c / d.v).toFixed(2) : 0;
+  return d[campo];
+}
+
+function buildDatasets(curso, metric) {
+  return tiposCota.map(tipo => {
+    const data = anos.map(ano => getVal(curso, ano, tipo, metric));
+    if (!data.some(v => v !== null)) return null;
+    return {
+      label: tipo,
+      data,
+      borderColor: coresCota[tipo],
+      backgroundColor: coresCota[tipo] + '22',
+      borderWidth: 2.2,
+      tension: 0.25,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      spanGaps: false,
+      fill: false
+    };
+  }).filter(Boolean);
+}
+
+function yTitle(metric) {
+  if (metric === 'c') return 'Candidatos';
+  if (metric === 'v') return 'Vagas';
+  return 'Candidatos por Vaga';
+}
+
+function chartOptions(titulo, metric) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: { display: true, text: titulo, font: { size: 13, weight: 'bold' }, color: '#e2e8f0' },
+      legend: { position: 'bottom', labels: { boxWidth: 11, padding: 8, font: { size: 10 }, color: '#e2e8f0' } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const v = ctx.parsed.y;
+            if (v === null || v === undefined) return ctx.dataset.label + ': sem dados';
+            if (metric === 'ratio') return ctx.dataset.label + ': ' + v.toFixed(2) + ' cand/vaga';
+            return ctx.dataset.label + ': ' + v.toLocaleString('pt-BR');
+          }
+        }
+      }
+    },
+    scales: {
+      x: { title: { display: true, text: 'Ano', font: { weight: 'bold', size: 11 }, color: '#a0aec0' }, ticks: { color: '#a0aec0' }, grid: { color: '#333' } },
+      y: { title: { display: true, text: yTitle(metric), font: { weight: 'bold', size: 11 }, color: '#a0aec0' }, beginAtZero: true, ticks: { color: '#a0aec0' }, grid: { color: '#333' } }
+    }
+  };
+}
+
+function calcStats(curso, metric) {
+  let vals = [];
+  anos.forEach(ano => {
+    tiposCota.forEach(tipo => {
+      const v = getVal(curso, ano, tipo, metric);
+      if (v !== null) {
+        if (metric === 'v' || metric === 'c') { if (v >= 0) vals.push(v); }
+        else vals.push(v);
+      }
+    });
+  });
+  vals = vals.filter(v => v !== null);
+  const media = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+  const min = vals.length ? Math.min(...vals) : 0;
+  const max = vals.length ? Math.max(...vals) : 0;
+  return { media, min, max };
+}
+
+const charts = {};
+let expandedChart = null;
+let expandedCursoId = null;
+let expandedMetric = 'c';
+
+const metrics = [
+  { key: 'c', label: 'Candidatos' },
+  { key: 'v', label: 'Vagas' },
+  { key: 'ratio', label: 'Cand/Vaga' }
+];
+
+const container = document.getElementById('chartsContainer');
+
+cursos.forEach(curso => {
+  charts[curso.id] = {};
+  const col = document.createElement('div');
+  col.className = 'col-lg-6 col-md-12';
+  col.innerHTML = `
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, ${curso.cor}, ${curso.cor}bb);">
+        <span>${curso.nome}</span>
+        <button class="btn btn-expand" onclick="expandirGrafico(${curso.id})" title="Expandir">⛶ Expandir</button>
+      </div>
+      <div class="card-body">
+        <ul class="nav nav-pills mb-2" id="tabs-${curso.id}">
+          ${metrics.map((m, i) => `
+            <li class="nav-item">
+              <button class="nav-link ${i === 0 ? 'active' : ''}" data-metric="${m.key}" onclick="trocarMetrica(${curso.id}, '${m.key}', this)">${m.label}</button>
+            </li>
+          `).join('')}
+        </ul>
+        <div class="chart-container"><canvas id="chart-${curso.id}"></canvas></div>
+        <div class="stats-box mt-2" id="stats-${curso.id}"></div>
+      </div>
+    </div>
+  `;
+  container.appendChild(col);
+
+  const datasets = buildDatasets(curso, 'c');
+  charts[curso.id].instance = new Chart(document.getElementById(`chart-${curso.id}`), {
+    type: 'line',
+    data: { labels: anos, datasets },
+    options: chartOptions(`${curso.nome} – Candidatos por Cota`, 'c')
+  });
+  charts[curso.id].metric = 'c';
+  updateStats(curso.id, 'c');
+});
+
+function updateStats(cursoId, metric) {
+  const curso = cursos.find(c => c.id === cursoId);
+  const s = calcStats(curso, metric);
+  document.getElementById(`stats-${cursoId}`).innerHTML = `
+    <div class="stat-item"><strong>Média:</strong> ${metric === 'ratio' ? s.media.toFixed(2) : Math.round(s.media).toLocaleString('pt-BR')}</div>
+    <div class="stat-item"><strong>Mín:</strong> ${metric === 'ratio' ? s.min.toFixed(2) : s.min.toLocaleString('pt-BR')}</div>
+    <div class="stat-item"><strong>Máx:</strong> ${metric === 'ratio' ? s.max.toFixed(2) : s.max.toLocaleString('pt-BR')}</div>
+    <div class="stat-item text-muted">${yTitle(metric)} por tipo de cota</div>
+  `;
+}
+
+window.trocarMetrica = function(cursoId, metric, btn) {
+  const curso = cursos.find(c => c.id === cursoId);
+  document.querySelectorAll(`#tabs-${cursoId} .nav-link`).forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const ch = charts[cursoId].instance;
+  ch.data.datasets = buildDatasets(curso, metric);
+  ch.options = chartOptions(`${curso.nome} – ${yTitle(metric)} por Cota`, metric);
+  ch.update();
+  charts[cursoId].metric = metric;
+  updateStats(cursoId, metric);
+};
+
+window.expandirGrafico = function(cursoId) {
+  const curso = cursos.find(c => c.id === cursoId);
+  expandedCursoId = cursoId;
+  expandedMetric = charts[cursoId].metric || 'c';
+  document.getElementById('modalExpandirLabel').textContent = curso.nome + ' (ampliado)';
+  const modalTabs = document.getElementById('modalTabs');
+  modalTabs.innerHTML = metrics.map(m => `
+    <li class="nav-item">
+      <button class="nav-link ${m.key === expandedMetric ? 'active' : ''}" onclick="trocarMetricaModal('${m.key}', this)">${m.label}</button>
+    </li>
+  `).join('');
+  renderExpandedChart(curso, expandedMetric);
+  const modal = new bootstrap.Modal(document.getElementById('modalExpandir'));
+  modal.show();
+};
+
+function renderExpandedChart(curso, metric) {
+  if (expandedChart) {
+    expandedChart.destroy();
+    expandedChart = null;
+  }
+  const s = calcStats(curso, metric);
+  document.getElementById('statsExpanded').innerHTML = `
+    <div class="stat-item"><strong>Média:</strong> ${metric === 'ratio' ? s.media.toFixed(2) : Math.round(s.media).toLocaleString('pt-BR')}</div>
+    <div class="stat-item"><strong>Mín:</strong> ${metric === 'ratio' ? s.min.toFixed(2) : s.min.toLocaleString('pt-BR')}</div>
+    <div class="stat-item"><strong>Máx:</strong> ${metric === 'ratio' ? s.max.toFixed(2) : s.max.toLocaleString('pt-BR')}</div>
+    <div class="stat-item text-muted">${yTitle(metric)} • linhas = tipos de cota</div>
+  `;
+  expandedChart = new Chart(document.getElementById('chartExpanded'), {
+    type: 'line',
+    data: { labels: anos, datasets: buildDatasets(curso, metric) },
+    options: chartOptions(`${curso.nome} – ${yTitle(metric)} por Cota`, metric)
+  });
+}
+
+window.trocarMetricaModal = function(metric, btn) {
+  expandedMetric = metric;
+  document.querySelectorAll('#modalTabs .nav-link').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const curso = cursos.find(c => c.id === expandedCursoId);
+  renderExpandedChart(curso, metric);
+};
+
+document.getElementById('modalExpandir').addEventListener('hidden.bs.modal', () => {
+  if (expandedChart) {
+    expandedChart.destroy();
+    expandedChart = null;
+  }
+});
+
+// ========== TABELA ==========
+const tbody = document.getElementById('tbodyDados');
+let linhas = [];
+
+cursos.forEach(curso => {
+  anos.forEach(ano => {
+    const tipos = curso.dados[ano] || {};
+    Object.entries(tipos).forEach(([tipo, d]) => {
+      linhas.push({
+        ano,
+        curso: curso.nome,
+        tipo,
+        candidatos: d.c,
+        vagas: d.v,
+        ratio: d.v > 0 ? +(d.c / d.v).toFixed(2) : 0,
+        nota: d.n,
+        salario: curso.salario
+      });
+    });
+  });
+});
+
+function renderTabela(filtro = '') {
+  const f = filtro.toLowerCase();
+  tbody.innerHTML = '';
+  linhas
+    .filter(l =>
+      l.curso.toLowerCase().includes(f) ||
+      String(l.ano).includes(f) ||
+      l.tipo.toLowerCase().includes(f)
+    )
+    .forEach(l => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${l.ano}</td>
+        <td><span class="badge bg-secondary badge-curso">${l.curso}</span></td>
+        <td>${l.tipo}</td>
+        <td>${l.candidatos.toLocaleString('pt-BR')}</td>
+        <td>${l.vagas}</td>
+        <td><strong>${l.ratio.toFixed(2)}</strong></td>
+        <td>${l.nota ? l.nota.toLocaleString('pt-BR') : '—'}</td>
+        <td>R$ ${l.salario.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+}
+
+renderTabela();
+document.getElementById('filtroTabela').addEventListener('input', e => renderTabela(e.target.value));
+
+// ========== QUESTÕES ==========
+function mediaRatio(curso) {
+  let sum = 0, n = 0;
+  anos.forEach(ano => {
+    const t = curso.dados[ano] || {};
+    ['Universal', 'Público'].forEach(tipo => {
+      if (t[tipo] && t[tipo].v > 0) {
+        sum += t[tipo].c / t[tipo].v;
+        n++;
+      }
+    });
+  });
+  return n ? sum / n : 0;
+}
+
+const medias = cursos.map(c => ({ nome: c.nome, media: mediaRatio(c) }));
+const maior = medias.reduce((a, b) => a.media > b.media ? a : b);
+const menor = medias.reduce((a, b) => a.media < b.media ? a : b);
+
+function crescUniv(curso) {
+  const a = curso.dados[2016] && curso.dados[2016]['Universal'];
+  const b = curso.dados[2025] && curso.dados[2025]['Universal'];
+  if (!a || !b || !a.v || !b.v) return 0;
+  const r1 = a.c / a.v;
+  const r2 = b.c / b.v;
+  return r1 > 0 ? ((r2 - r1) / r1 * 100) : 0;
+}
+
+const cresc = cursos.map(c => ({ nome: c.nome, c: crescUniv(c) }));
+const maiorC = cresc.reduce((a, b) => a.c > b.c ? a : b);
+const quedas = cresc.filter(x => x.c < -10);
+
+const questoes = [
+  { t: "1. Qual curso apresentou maior concorrência?", r: `<strong>${maior.nome}</strong> (média ${maior.media.toFixed(1)} cand/vaga).` },
+  { t: "2. Qual curso apresentou menor concorrência?", r: `<strong>${menor.nome}</strong> (média ${menor.media.toFixed(1)} cand/vaga).` },
+  { t: "3. Qual curso apresentou maior crescimento?", r: `<strong>${maiorC.nome}</strong> (${maiorC.c >= 0 ? '+' : ''}${maiorC.c.toFixed(1)}% na Universal).` },
+  { t: "4. Houve queda de concorrência?", r: quedas.length ? `Sim: <strong>${quedas.map(q => q.nome + ' (' + q.c.toFixed(1) + '%)').join(', ')}</strong>.` : 'Não houve queda ≥10% na Universal.' },
+  { t: "5. Qual curso foi mais estável?", r: `<strong>Administração</strong> e <strong>Turismo</strong> mostram menor variação de candidatos e vagas.` },
+  { t: "6. Qual ano teve maior concorrência média?", r: `<strong>2020–2021</strong> concentram picos de candidatos (ex.: Medicina Universal).` },
+  { t: "7. Relação concorrência e nota mínima?", r: `Sim: mais candidatos/vaga → notas mínimas mais altas, sobretudo na Universal.` },
+  { t: "8. Outras conclusões?", r: `Use as abas <strong>Candidatos</strong>, <strong>Vagas</strong> e <strong>Cand/Vaga</strong> e o botão Expandir para analisar cada série.` }
+];
+
+const cq = document.getElementById('respostasQuestoes');
+questoes.forEach(q => {
+  const col = document.createElement('div');
+  col.className = 'col-md-6';
+  col.innerHTML = `
+    <div class="card h-100 border-0 bg-light">
+      <div class="card-body">
+        <h6 class="text-primary">${q.t}</h6>
+        <p class="mb-0">${q.r}</p>
+      </div>
+    </div>
+  `;
+  cq.appendChild(col);
+});
